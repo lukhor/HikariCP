@@ -302,6 +302,15 @@ abstract class PoolBase
          createNetworkTimeoutExecutor(dataSource, dsClassName, jdbcUrl);
       }
 
+      if (dataSource instanceof OracleDataSource.class) {
+         OracleDataSource ods = (OracleDataSource) dataSource;
+
+         Properties properties = new Properties();
+         properties.setProperty("includeSynonyms", "true");
+
+         ods.setConnectionProperties(properties);
+      }
+
       this.dataSource = dataSource;
    }
 
